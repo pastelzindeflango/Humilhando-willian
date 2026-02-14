@@ -2,7 +2,6 @@
 
 namespace App\Providers;
 
-use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -12,12 +11,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        // Register file system
-        if (! $this->app->has('files')) {
-            $this->app->singleton('files', function () {
-                return new Filesystem;
-            });
-        }
+        //
     }
 
     /**
