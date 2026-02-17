@@ -15,11 +15,25 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
-
-        User::factory()->create([
+        // create a test user
+        $user = User::factory()->create([
             'name' => 'Test User',
             'email' => 'test@example.com',
         ]);
+
+        // seed plans and courses
+        $this->call([\Database\Seeders\PlanSeeder::class, \Database\Seeders\CourseSeeder::class]);
+
+        // attach a plan and a course to the test user so the profile shows data
+        $plan = \App\Models\Plan::first();
+        $course = \App\Models\Course::first();
+
+        if ($plan) {
+            $user->plans()->attach($plan->id, ['purchased_at' => now()]);
+        }
+
+        if ($course) {
+            $user->courses()->attach($course->id, ['completed_at' => now()]);
+        }
     }
 }

@@ -21,6 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'api_token',
     ];
 
     /**
@@ -31,6 +32,7 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
         'remember_token',
+        'api_token',
     ];
 
     /**
@@ -45,4 +47,17 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    // purchased plans
+    public function plans()
+    {
+        return $this->belongsToMany(Plan::class)->withPivot('purchased_at')->withTimestamps();
+    }
+
+    // completed courses
+    public function courses()
+    {
+        return $this->belongsToMany(Course::class)->withPivot('completed_at')->withTimestamps();
+    }
 }
+

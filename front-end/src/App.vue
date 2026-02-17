@@ -4,6 +4,10 @@
       <nav>
         <router-link to="/">Home</router-link>
         <router-link to="/users">Usuários</router-link>
+        <router-link to="/cadastro">Cadastro</router-link>
+        <router-link v-if="auth.user" to="/perfil">Perfil</router-link>
+        <router-link v-if="!auth.user" to="/login">Login</router-link>
+        <button v-else class="logout-btn" @click="auth.logout()">Sair</button>
       </nav>
     </header>
     <main class="container">
@@ -13,6 +17,8 @@
 </template>
 
 <script setup>
+import { useAuthStore } from './stores/auth'
+const auth = useAuthStore()
 </script>
 
 <style>
@@ -60,6 +66,14 @@ nav a.router-link-active {
   color: #4CAF50;
   border-bottom: 2px solid #4CAF50;
   padding-bottom: 0.5rem;
+}
+
+.logout-btn {
+  background: transparent;
+  border: none;
+  color: white;
+  font-weight: 500;
+  cursor: pointer;
 }
 
 .container {

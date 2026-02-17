@@ -14,16 +14,33 @@ const routes = [
     name: 'Users',
     component: Users
   },
+
+  {
+    path: '/perfil',
+    name: 'Perfil',
+    component: () => import('../views/Perfil.vue')
+  },
   {
     path: '/curso',
     name: 'Opçao',
     component: Opçao
   },
-  // {
-  //   path: '/pagamento',
-  //   name: 'Pagamento',
-  //   component: () => import('../views/Pagamento.vue')
-  // }
+
+  {
+    path: '/pagamento',
+    name: 'Pagamento',
+    component: () => import('../views/Pagamento.vue')
+  }, 
+  {
+    path: '/cadastro',
+    name: 'Cadastro',
+    component: () => import('../views/Cadastro.vue')
+  },
+  {
+    path: '/login',
+    name: 'Login',
+    component: () => import('../views/Login.vue')
+  }
 ]
 
 const router = createRouter({

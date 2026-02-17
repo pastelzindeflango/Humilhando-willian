@@ -60,7 +60,7 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
-import axios from 'axios'
+import api from '../services/api'
 
 const users = ref([])
 const form = ref({
@@ -74,7 +74,7 @@ onMounted(() => {
 
 const fetchUsers = async () => {
   try {
-    const response = await axios.get('/api/users')
+    const response = await api.get('/users')
     users.value = response.data || []
   } catch (error) {
     console.error('Erro ao buscar usuários:', error)
@@ -83,7 +83,7 @@ const fetchUsers = async () => {
 
 const addUser = async () => {
   try {
-    await axios.post('/api/users', form.value)
+    await api.post('/users', form.value)
     form.value = { name: '', email: '' }
     fetchUsers()
   } catch (error) {
